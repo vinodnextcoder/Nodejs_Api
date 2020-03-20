@@ -19,3 +19,23 @@ describe('/GET book', () => {
       });
   });
 });
+describe("CRUD OPERATIONS", function () {
+  var users = [{
+    "name": "sharad pa"
+
+  }, {
+    "name": "John patil"
+  }]
+  it("Should add user in DB", (done) => {
+    for (user in users) {
+      chai.request(server)
+        .post("/api/adduser")
+        .send(users[user])
+        .end((err, res) => {
+          res.should.have.status(200);
+          console.log("Response Body:", res.body);
+        })
+    }
+    done()
+  })
+});
