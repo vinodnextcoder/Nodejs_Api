@@ -20,3 +20,22 @@ const users = [
 app.get('/api/usersData', (req, res) => {
     res.send(users);
 });
+
+app.get('/api/:id', (req, res) => {
+    const user = users.find(c => c.id === parseInt(req.params.id));
+    if (!user) res.status(404).send('<h2 style="font-family: Malgun Gothic; color: darkred;">Ooops... Cant find User Data, you are looking for!</h2>');
+    res.send(user);
+});
+
+app.post('/api/adduser', (req, res) => {
+    if (!req.body.name) {
+        res.status(400).send({"msg":"no name found"})
+        return;
+    }
+    const user = {
+        id: users.length + 1,
+        title: req.body.name
+    };
+    users.push(user);
+    res.send(users);
+});
