@@ -39,3 +39,5 @@ app.post('/api/adduser', (req, res) => {
     users.push(user);
     res.send(users);
 });
+
+module.exports = app
